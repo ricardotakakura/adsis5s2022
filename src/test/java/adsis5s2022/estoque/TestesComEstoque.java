@@ -14,6 +14,22 @@ import org.junit.Test;
 public class TestesComEstoque {
 
 	@Test
+	public void testar_soma_quantidades() {
+		List<MovimentoEstoque> movimento = new ArrayList<>();
+		MovimentoEstoque compra01 = new MovimentoEstoque(TipoMovimentoEstoque.COMPRA, criarDataDDMMYYYY("25/01/2022"), new BigDecimal("10.00"), new BigDecimal("3272.50"));
+		MovimentoEstoque compra02 = new MovimentoEstoque(TipoMovimentoEstoque.COMPRA, criarDataDDMMYYYY("01/02/2022"), new BigDecimal("3.00"), new BigDecimal("3016.67"));
+		
+		movimento.add(compra01);
+		movimento.add(compra02);
+		
+		BigDecimal totalizador = movimento.stream().map(me -> me.getQuantidade()).reduce(new BigDecimal("0.00"), (total, atual) -> total.add(atual));
+		
+		assertEquals(new BigDecimal("13.00"), totalizador);
+			
+	}
+
+	
+	@Test
 	public void testar_custo_médio_somente_entradas() {
 		List<MovimentoEstoque> movimento = new ArrayList<>();
 		MovimentoEstoque compra01 = new MovimentoEstoque(TipoMovimentoEstoque.COMPRA, criarDataDDMMYYYY("25/01/2022"), new BigDecimal("10.00"), new BigDecimal("3272.50"));
