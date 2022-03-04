@@ -26,6 +26,13 @@ public class TestesIntrodutórios {
 		assertEquals(62, total, 0);
 
 	}
+	@Test(expected = DivisãoPorZeroException.class)
+	public void teste_de_divisão_por_zero() {
+		Calculadora calc = new Calculadora();
+		double total = calc.dividir(10, 0);		
+	}
+
+	
 	@Test
 	public void teste_de_divisão() {
 		Calculadora calc = new Calculadora();

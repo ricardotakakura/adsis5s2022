@@ -15,6 +15,9 @@ public class Calculadora {
 	}
 
 	public double dividir(double v1, double v2) {
+		if (v2 == 0) {
+			throw new DivisãoPorZeroException();
+		}
 		BigDecimal aux = new BigDecimal(v1 / v2);
 		aux = aux.setScale(6, RoundingMode.DOWN);
 		return aux.doubleValue();
