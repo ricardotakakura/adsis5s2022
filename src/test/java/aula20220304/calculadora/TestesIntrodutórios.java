@@ -57,5 +57,54 @@ public class TestesIntrodutórios {
 		assertEquals(45, total, 0);
 
 	}
+	@Test
+	public void teste_com_memória_zero() {
+		Calculadora calc = new Calculadora();
+		calc.subtrair(1, 1);
+		
+		calc.memorizar();
+		
+		double memória = calc.getMemória();
+		
+		assertEquals(0, memória, 0);		
+	}
+	@Test
+	public void teste_com_memória() {
+		Calculadora calc = new Calculadora();
+		calc.multiplicar(10, 3);
+		
+		calc.memorizar();
+		 
+		calc.multiplicar(10, 2);
+		calc.multiplicar(1.5, -80);
+		
+		double memória = calc.getMemória();
+		
+		assertEquals(30, memória, 0);
+	}
+	@Test(expected = MemóriaInexistenteException.class)
+	public void teste_sem_memória() {
+		Calculadora calc = new Calculadora();
+		
+		double memória = calc.getMemória();		
+	}
+	@Test
+	public void teste_limpando_memória() {
+		Calculadora calc = new Calculadora();
+		calc.multiplicar(10, 3);
+		
+		calc.memorizar();
+		 
+		calc.getMemória();
+		calc.limparMemória();
+		try {
+			calc.getMemória();	
+			fail("Cadê a exceção ao usar getMemória() quando não tem memória???");
+		} catch (Exception e) {
+		}
+	}
+	
 
 }
+
+
